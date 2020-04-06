@@ -1,0 +1,117 @@
+!DOCTYPE html> 
+<html>
+<head>
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+
+<body>
+    <div data-role = "page" id="web1">
+        <div data-role="header">
+            <h1>Koperasi</h1>
+        </div>
+            
+        <div role="main" class="ui-content">
+            <div class="ui-grid-a ui-responsive">               
+                <div class="ui-body ui-body-d">
+                    <label for="pinjaman">Pinjaman : </label>
+                    <input type="number" name="pinjaman" id="pinjaman">				
+                </div>              
+                <div class="ui-body ui-body-d">
+                    <label for="waktu">Waktu Pinjam : </label>
+                    <input type="number" name="waktu" id="waktu" value="">				
+                </div>
+                <div class="ui-body ui-body-d">
+                    <button class="ui-btn" onclick="output();">Calculate</button>
+                    	
+                </div>		
+            </div>
+            <div>
+                <p>Total Pengembalian : <span id="total"></span></p>
+            </div>
+           
+        </div>
+    
+        <div data-role="footer">
+            <a href="#web2" data-transition="fade">Next Page</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="web2">
+        <div data-role="header">
+            <h1>List Pinjaman</h1>
+        </div>
+
+        <div data-role="main">
+            <div>
+                <ul data-role="listview">
+
+                </ul>
+            </div>
+        </div>
+
+        <div data-role="footer">
+            <a href="#web1" data-transition="fade">Back</a>
+            <a href="#web3" data-transition="fade">Next Page</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="web3">
+        <div data-role="header">
+            <h1>Informasi Cicilan</h1>
+        </div>
+
+        <div data-role="main">
+            <ul data-role="listview">
+
+            </ul>
+        </div>
+
+        <div data-role="footer">
+            <a href="#web2" data-transition="fade">Back</a>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+	function output()
+    {
+		var intpinjaman = document.getElementById('pinjaman').value;
+		var intwaktu = document.getElementById('waktu').value;
+
+		if (parseInt(intwaktu)>=1 && parseInt(intwaktu)<=6) 
+        {
+			var calculating = parseInt(intpinjaman) + (parseInt(intpinjaman) * 0.02 * parseInt(intwaktu))
+			document.getElementById('total').innerHTML =parseInt(intpinjaman)+" + "+ "("+parseInt(intpinjaman)+" * 2% * " +parseInt(intwaktu)+") = "+parseInt(calculating);
+		}
+		else if (parseInt(intwaktu)>=7 && parseInt(intwaktu)<=12) 
+        {
+			var calculating = parseInt(intpinjaman) + (parseInt(intpinjaman) * 0.015 * parseInt(intwaktu))
+			document.getElementById('total').innerHTML =parseInt(intpinjaman)+" + "+ "("+parseInt(intpinjaman)+" * 1,5% * " +parseInt(intwaktu)+") = "+parseInt(calculating);
+		}
+		else if (parseInt(intwaktu)>12) 
+        {
+			var calculating = parseInt(intpinjaman) + (parseInt(intpinjaman) * 0.01 * parseInt(intwaktu))
+			document.getElementById('total').innerHTML =parseInt(intpinjaman)+" + "+ "("+parseInt(intpinjaman)+" * 1% * " +parseInt(intwaktu)+") = "+parseInt(calculating);
+		}
+		var ul = $("ul");
+		var row = "<li> Pinjaman : "+parseInt(intpinjaman)+" Waktu : "+ parseInt(intwaktu) + " Yang Harus di Bayar : " + parseInt(calculating)+"</li>";
+		ul.html(ul.html()+row);
+        var ul = $("ul");
+		var row = parseInt(intpinjaman)+" Waktu : "+ parseInt(intwaktu) + " Yang Harus di Bayar : " + parseInt(calculating);
+	}
+
+    $(document).on("scrollstart",function(){
+        alert("Selamat datang di koperasi!");
+    });
+  
+</script>
+
+</html>
+
+
